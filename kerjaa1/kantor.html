@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DARAWA STUDIO</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(135deg, #2c3e50, #3498db);
+        color: white;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        background-color: rgba(44, 62, 80, 0.9);
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        color: white;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        margin-right: 80px;
+      }
+
+      .nav-links li {
+        margin-left: 2rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #74b9ff;
+      }
+
+      .burger {
+        display: none;
+        cursor: pointer;
+        width: 0.1px;
+        padding-top: 25px;
+      }
+
+      .burger div {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 5px;
+        transition: all 0.3s ease;
+      }
+
+      /* Project Detail Styles */
+      .project-detail {
+        padding: 120px 2rem 5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .project-breadcrumb {
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .project-breadcrumb a {
+        color: #3498db;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .project-breadcrumb a:hover {
+        color: #2c3e50;
+      }
+
+      .project-breadcrumb span {
+        margin: 0 10px;
+        color: #777;
+      }
+
+      .project-heading {
+        margin-bottom: 3rem;
+      }
+
+      .project-heading h1 {
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+      }
+
+      .project-meta {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .project-category {
+        background-color: #e3f2fd;
+        color: #3498db;
+        padding: 0.3rem 1rem;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        margin-right: 1rem;
+      }
+
+      .project-date {
+        color: #777;
+        font-size: 0.9rem;
+      }
+
+      /* Image Gallery */
+      .project-gallery {
+        margin-bottom: 3rem;
+      }
+
+      .gallery-main {
+        position: relative;
+        height: 500px;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+      }
+
+      .gallery-main img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .gallery-thumbnails {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+      }
+
+      .gallery-thumbnail {
+        width: 120px;
+        height: 80px;
+        border-radius: 5px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+
+      .gallery-thumbnail:hover {
+        transform: translateY(-5px);
+      }
+
+      .gallery-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .gallery-thumbnail.active {
+        border: 3px solid #3498db;
+      }
+
+      /* Project Content */
+      .project-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .project-description {
+        flex: 2;
+        min-width: 300px;
+      }
+
+      .project-description h2 {
+        font-size: 1.8rem;
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+      }
+
+      .project-description p {
+        margin-bottom: 1.5rem;
+        color: #555;
+      }
+
+      .project-details {
+        flex: 1;
+        min-width: 250px;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-details h3 {
+        font-size: 1.3rem;
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+      }
+
+      .project-detail-item {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .detail-label {
+        color: #777;
+        font-size: 0.9rem;
+      }
+
+      .detail-value {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .project-tag {
+        background-color: #f1f1f1;
+        color: #555;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+      }
+
+      /* Related Projects */
+      .related-projects {
+        margin-top: 5rem;
+      }
+
+      .related-projects h2 {
+        font-size: 1.8rem;
+        color: #2c3e50;
+        margin-bottom: 2rem;
+      }
+
+      .related-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      /* Project Navigation */
+      .project-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5rem;
+        padding-top: 2rem;
+        border-top: 1px solid #eee;
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #333;
+        transition: color 0.3s;
+      }
+
+      .nav-item:hover {
+        color: #3498db;
+      }
+
+      .nav-item i {
+        margin: 0 10px;
+      }
+
+      .nav-prev i {
+        margin-right: 10px;
+      }
+
+      .nav-next i {
+        margin-left: 10px;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        margin-top: 5rem;
+      }
+
+      .footer-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 1rem 0;
+      }
+
+      .footer-link {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-link:hover {
+        color: #74b9ff;
+      }
+
+      .copyright {
+        margin-top: 2rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+      }
+
+      /* WhatsApp button */
+      .whatsapp-float {
+        position: fixed;
+        bottom: 5.5rem;
+        right: 2rem;
+        width: 50px;
+        height: 50px;
+        background-color: #25d366;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        transition: transform 0.3s, box-shadow 0.3s;
+        text-decoration: none;
+      }
+
+      .whatsapp-float:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+      }
+
+      .whatsapp-float i {
+        font-size: 1.5rem;
+      }
+
+      /* Scroll to top button */
+      .scroll-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 40px;
+        height: 40px;
+        background-color: #3498db;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
+        z-index: 1000;
+      }
+
+      .scroll-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .scroll-top:hover {
+        background-color: #2c3e50;
+      }
+
+      /* Dark Mode Styles */
+      .dark-mode {
+        background-color: #222;
+        color: #f1f1f1;
+      }
+
+      .dark-mode .project-heading h1,
+      .dark-mode .project-description h2,
+      .dark-mode .project-details h3,
+      .dark-mode .related-projects h2 {
+        color: #f1f1f1;
+      }
+
+      .dark-mode .project-description p {
+        color: #ccc;
+      }
+
+      .dark-mode .project-details {
+        background-color: #333;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .dark-mode .detail-value {
+        color: #f1f1f1;
+      }
+
+      .dark-mode .project-tag {
+        background-color: #444;
+        color: #ccc;
+      }
+
+      .dark-mode .nav-item {
+        color: #f1f1f1;
+      }
+
+      .dark-mode .project-breadcrumb a {
+        color: #74b9ff;
+      }
+
+      .dark-mode .project-breadcrumb span {
+        color: #aaa;
+      }
+
+      /* Responsive styles */
+      @media screen and (max-width: 768px) {
+        .nav-links {
+          position: absolute;
+          right: 0;
+          top: 70px;
+          background-color: #2c3e50;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 45%;
+          transform: translateX(100%);
+          transition: transform 0.5s ease-in;
+          z-index: 100;
+          margin-right: 0;
+          border-radius: 25px;
+        }
+
+        .nav-links li {
+          opacity: 0;
+          margin: 1rem 0;
+        }
+
+        .burger {
+          display: block;
+        }
+
+        .nav-active {
+          transform: translateX(0%);
+        }
+
+        .gallery-main {
+          height: 300px;
+        }
+
+        .project-content {
+          flex-direction: column;
+        }
+
+        .project-details {
+          width: 100%;
+        }
+      }
+
+      /* Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.8s ease forwards;
+      }
+
+      /* Theme Switch */
+      .theme-switch {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 25px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 25px;
+        cursor: pointer;
+        z-index: 1010;
+      }
+
+      .theme-switch::before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 21px;
+        height: 21px;
+        background-color: white;
+        border-radius: 50%;
+        transition: transform 0.3s;
+      }
+
+      .dark-mode .theme-switch::before {
+        transform: translateX(25px);
+      }
+
+      /* maps */
+      .map-container {
+      width: 100%;
+      max-width: 800px;
+      height: 300px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- Theme Switch -->
+    <div class="theme-switch"></div>
+
+    <!-- Header and Navigation -->
+    <nav>
+      <div class="nav-container">
+        <div class="logo">
+          <a
+            href="index.html#home"
+            style="text-decoration: none; color: white; font-size: 30px"
+            ><b>Darawa Studio</b></a
+          >
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#Service">Service</a></li>
+          <li><a href="index.html#portofolio">Portofolio</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="burger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Project Detail Section -->
+    <section class="project-detail">
+      <div class="project-breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="index.html#portofolio">Portfolio</a>
+        <span>/</span>
+        <span id="project-name">Jagaraga Village Office</span>
+      </div>
+
+      <div class="project-heading fade-in">
+        <h1 id="project-title">
+          Jagaraga Village Office - Civic Architecture with Classical Nuance
+        </h1>
+        <div class="project-meta">
+          <div class="project-category">Residential</div>
+          <div class="project-date">Completed: March 2025</div>
+        </div>
+      </div>
+
+      <div class="project-gallery fade-in">
+        <div class="gallery-main">
+          <img
+            src="img/KANTO DESA JAGARAGA-20250516T172429Z-1-001/KANTO DESA JAGARAGA/1.6.jpg"
+            alt="Project Main Image"
+            id="main-image"
+          />
+        </div>
+        <div class="gallery-thumbnails">
+          <div
+            class="gallery-thumbnail active"
+            data-img="img/KANTO DESA JAGARAGA-20250516T172429Z-1-001/KANTO DESA JAGARAGA/14.jpg"
+          >
+            <img
+              src="img/KANTO DESA JAGARAGA-20250516T172429Z-1-001/KANTO DESA JAGARAGA/14.jpg"
+              alt="Thumbnail 1"
+            />
+          </div>
+          <div
+            class="gallery-thumbnail"
+            data-img="img/KANTO DESA JAGARAGA-20250516T172429Z-1-001/KANTO DESA JAGARAGA/5.jpg"
+          >
+            <img
+              src="img/KANTO DESA JAGARAGA-20250516T172429Z-1-001/KANTO DESA JAGARAGA/5.jpg"
+              alt="Thumbnail 2"
+            />
+          </div>
+          <div
+            class="gallery-thumbnail"
+            data-img="img/KANTO DESA JAGARAGA-20250516T172429Z-1-001/KANTO DESA JAGARAGA/tes.1jpg.jpg"
+          >
+            <img
+              src="img/KANTO DESA JAGARAGA-20250516T172429Z-1-001/KANTO DESA JAGARAGA/tes.1jpg.jpg"
+              alt="Thumbnail 3"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="project-content">
+        <div class="project-description fade-in">
+          <h2>Project Description</h2>
+          <p>
+            The Jagaraga Village Office is a civic architecture project that
+            embodies formality, accessibility, and cultural identity. Designed
+            with a blend of neoclassical features and local aesthetics, the
+            building communicates authority and public service while remaining
+            welcoming to the community. The front elevation features a
+            symmetrical colonnade with accentuated yellow details on the
+            columns, signifying vibrance and optimism.
+          </p>
+          <p>
+            Its central dome acts as a symbolic crown, evoking traditional
+            Indonesian architecture with a modern interpretation. The layout
+            prioritizes functional space planning with clear circulation,
+            enhanced greenery, and accessibility. This design aims to reflect a
+            sense of pride, transparency, and progress for the residents of
+            Jagaraga.
+          </p>
+        </div>
+
+        <div class="project-details fade-in">
+          <h3>Project Details</h3>
+          <div class="project-detail-item">
+            <span class="detail-label">Client</span>
+            <span class="detail-value">Kepala Desa</span>
+          </div>
+          <div class="project-detail-item">
+            <span class="detail-label">Location</span>
+            <span class="detail-value">Lombok, NTB</span>
+          </div>
+          <div class="project-detail-item">
+            <span class="detail-label">Area</span>
+            <span class="detail-value">100 m²</span>
+          </div>
+          <div class="project-detail-item">
+            <span class="detail-label">Year</span>
+            <span class="detail-value">2023</span>
+          </div>
+          <div class="project-detail-item">
+            <span class="detail-label">Status</span>
+            <span class="detail-value">Completed</span>
+          </div>
+          <div class="project-detail-item">
+            <span class="detail-label">Services</span>
+            <span class="detail-value">Architecture, Interior Design</span>
+          </div>
+
+          <div class="project-tags">
+            <div class="project-tag">Modern</div>
+            <div class="project-tag">Residential</div>
+            <div class="project-tag">Sustainable</div>
+            <div class="project-tag">Minimalist</div>
+          </div>
+        </div>
+         <!-- disini maps!! -->
+         <div class="map-container">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126916.11867609498!2d106.6894299773169!3d-6.229728021398184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1577f793e67%3A0x401576d14fedc50!2sJakarta!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="index.html#home" class="footer-link">Home</a>
+          <a href="index.html#Service" class="footer-link">Service</a>
+          <a href="index.html#portofolio" class="footer-link">Portfolio</a>
+          <a href="index.html#contact" class="footer-link">Contact</a>
+        </div>
+        <p class="copyright">
+          &copy; <span id="current-year"></span> DARAWA STUDIO. All Rights
+          Reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- WhatsApp floating button -->
+    <a
+      href="https://wa.me/6285338213668"
+      target="_blank"
+      class="whatsapp-float"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-top">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+      // Preloader
+      window.addEventListener("load", function () {
+        document.body.classList.add("loaded");
+      });
+
+      // Navigation
+      const navSlide = () => {
+        const burger = document.querySelector(".burger");
+        const nav = document.querySelector(".nav-links");
+        const navLinks = document.querySelectorAll(".nav-links li");
+
+        burger.addEventListener("click", () => {
+          // Toggle Nav
+          nav.classList.toggle("nav-active");
+
+          // Animate Links
+          navLinks.forEach((link, index) => {
+            if (link.style.animation) {
+              link.style.animation = "";
+            } else {
+              link.style.animation = `fadeIn 0.5s ease forwards ${
+                index / 7 + 0.3
+              }s`;
+            }
+          });
+
+          // Burger Animation
+          burger.classList.toggle("toggle");
+        });
+      };
+
+      navSlide();
+
+      // Smooth scrolling for navigation
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href"))?.scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Scroll to top button
+      const scrollTopBtn = document.querySelector(".scroll-top");
+      const navbar = document.querySelector("nav");
+
+      window.addEventListener("scroll", () => {
+        // Scroll to top button visibility
+        if (window.pageYOffset > 300) {
+          scrollTopBtn.classList.add("show");
+        } else {
+          scrollTopBtn.classList.remove("show");
+        }
+
+        // Navbar scroll effect
+        if (window.pageYOffset > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // Gallery image switcher
+      const mainImage = document.getElementById("main-image");
+      const thumbnails = document.querySelectorAll(".gallery-thumbnail");
+
+      thumbnails.forEach((thumbnail) => {
+        thumbnail.addEventListener("click", () => {
+          // Update active class
+          thumbnails.forEach((thumb) => thumb.classList.remove("active"));
+          thumbnail.classList.add("active");
+
+          // Update main image
+          const imgSrc = thumbnail.getAttribute("data-img");
+          mainImage.src = imgSrc;
+          mainImage.style.opacity = "0";
+          setTimeout(() => {
+            mainImage.style.opacity = "1";
+          }, 100);
+        });
+      });
+
+      // Dark mode toggle
+      const themeSwitch = document.querySelector(".theme-switch");
+
+      themeSwitch.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+
+        // Save theme preference to local storage
+        if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark");
+        } else {
+          localStorage.setItem("theme", "light");
+        }
+      });
+
+      // Check for saved theme preference
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+
+      // Set current year in footer
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+
+      // Get URL parameters to update content based on project
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+
+      // Update project details based on URL parameter (for demonstration)
+      const projectId = getUrlParameter("id");
+      if (projectId) {
+        // In a real implementation, you would fetch project details from a database
+        // This is just a placeholder for demonstration
+        console.log("Loading project ID:", projectId);
+      }
+    </script>
+  </body>
+</html>
